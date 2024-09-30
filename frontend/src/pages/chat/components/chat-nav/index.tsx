@@ -21,7 +21,7 @@ export const ChatNav = () => {
 
                 <div>
                     {
-                        [1, 1, 1, 1, 1, 1, 1].map((item, index) => <ChatCard key={index} />)
+                         <ChatCard  />
                     }
 
                 </div>

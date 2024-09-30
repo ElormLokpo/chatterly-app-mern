@@ -6,11 +6,11 @@ export const ChatCard = () => {
         <div className="flex mb-7 justify-between hover:bg-stone-800 hover:p-1.5 hover:cursor-pointer transition-all rounded">
             <div className="flex items-center gap-2">
                 <div>
-                    <ProfileImage />
+                    <ProfileImage content="BG" />
                 </div>
                 <div>
-                    <p className="font-semibold text-[0.8rem]">Josh Flinn </p>
-                    <p className="text-xs font-light">Just saying hello Josh</p>
+                    <p className="font-semibold text-[0.8rem]">Broadcast Group </p>
+                    <p className="text-xs font-light">This is a default broadcast group</p>
                 </div>
             </div>
 
