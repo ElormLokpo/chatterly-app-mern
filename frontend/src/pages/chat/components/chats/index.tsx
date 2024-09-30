@@ -9,7 +9,7 @@ import { useSelector } from "react-redux"
 let socket = io("http://localhost:8080")
 
 export const Chats = () => {
-    
+    const [myMessage, setMyMessage] = useState<any>();
     const [room, setRoom] = useState("broadcast_room");
     const [receivedMessage, setReceivedMessage] = useState();
     const current_usr = useSelector((state:any)=>state.auth.value.current_user)
@@ -27,6 +27,8 @@ export const Chats = () => {
             name: current_usr.firstname + " " + current_usr.lastname,
             initials: `${current_usr.firstname[0]}${current_usr.lastname[0]}`
         }
+
+        setMyMessage(messageObject)
         socket.emit("send", messageObject)
     }
 
@@ -44,7 +46,7 @@ export const Chats = () => {
             <TopSection />
 
             <div className="h-[43rem]">
-                <MessageContainer receivedMessage = {receivedMessage} />
+                <MessageContainer receivedMessage = {receivedMessage} myMessage={myMessage} />
             </div>
 
             <MessageInput setMessageHandler={hanldeMessage} />
