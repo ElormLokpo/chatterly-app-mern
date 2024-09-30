@@ -56,7 +56,7 @@ export const MessageContainer = ({ receivedMessage, myMessage }: { receivedMessa
                    Array.from(myMessagesSet).map((item, index) => {
                     if (item) {
                         
-                        return <Message key={index} name={item.name} time={item.time} message={item.message} initials={item.initials}/>
+                        return <Message style_type="" key={index} name={item.name} time={item.time} message={item.message} initials={item.initials}/>
                     }
                     return null
                 })
