@@ -1,18 +1,53 @@
+import { useEffect, useState } from "react"
 import { MessageContainer } from "./components/message-container"
 import { MessageInput } from "./components/message-input"
 import { TopSection } from "./components/top-section"
+import { io } from "socket.io-client"
+import { format } from "date-fns";
+import { useSelector } from "react-redux"
+
+let socket = io("http://localhost:8080")
+
+export const Chats = () => {
+    
+    const [room, setRoom] = useState("broadcast_room");
+    const [receivedMessage, setReceivedMessage] = useState();
+    const current_usr = useSelector((state:any)=>state.auth.value.current_user)
+   
+
+    const hanldeMessage = (message: string) => {
+        
+        const now = new Date();
+        let time = format(now, 'h:mm a');
+        
+        let messageObject = {
+            time, 
+            message, 
+            room,
+            name: current_usr.firstname + " " + current_usr.lastname,
+            initials: `${current_usr.firstname[0]}${current_usr.lastname[0]}`
+        }
+        socket.emit("send", messageObject)
+    }
 
 
-export const Chats  = ()=>{
-    return(
+    useEffect(() => {
+        socket.emit("join_room", room)
+    }, [])
+
+    useEffect(() => {
+        socket.on("receive", (data) => setReceivedMessage(data))
+    }, [socket])
+
+    return (
         <div className="p-5 h-full">
             <TopSection />
 
             <div className="h-[43rem]">
-                <MessageContainer />
+                <MessageContainer receivedMessage = {receivedMessage} />
             </div>
 
-            <MessageInput />
+            <MessageInput setMessageHandler={hanldeMessage} />
         </div>
     )
 }
