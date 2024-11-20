@@ -31,7 +31,4 @@
   - MongoDB (storing user and message data)
   - Socket.IO (handling real-time communication)
 
-## Screenshots:
-![Screenshot 2024-09-30 082401](https://github.com/user-attachments/assets/732e78b0-f632-4f6d-8e20-33ca221e47c5)
-
 
